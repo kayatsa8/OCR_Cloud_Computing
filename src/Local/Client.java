@@ -37,8 +37,6 @@ public class Client {
     }
 
     public void run(){
-        System.out.println("PRINT-CLIENT:run");
-
         getUsername();
         uploadFile(inputFileName, username);
         getManager();
@@ -46,7 +44,6 @@ public class Client {
         File file = getAnswer(queueUrl); //waiting until tag "To" of queue is "Yes" (Map<String , String>).
         createHTML(file);
         onExit();
-
     }
 
     private void getUsername(){

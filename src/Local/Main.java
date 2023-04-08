@@ -28,6 +28,12 @@ public class Main {
          * special case: terminate manager
          */
         if(args.length >= 3){
+            /*
+                args[0] = input file name
+                args[1] = output file name
+                args[2] = maximum number of files a worker can work on simultaneously
+                args[3] = ask the manager to shut down after processing the current client's input (optional)
+             */
             Client client = new Client(args[0], args[1], args[2]);
             if(args.length == 4){
                 client.askForTermination(args[3]);
