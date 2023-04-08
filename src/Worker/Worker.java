@@ -43,7 +43,6 @@ public class Worker {
 
     //Get url of managerToWorker queue.
     private ListQueuesResponse getQueueResponse(String prefix){
-        System.out.println("Worker: getQueueResponse");
         try {
             ListQueuesRequest listQueuesRequest = ListQueuesRequest.builder().queueNamePrefix(prefix).build();
             return SQS_Service.getInstance().getQuesesResponse(listQueuesRequest);
@@ -57,12 +56,10 @@ public class Worker {
     }
 
     private String getQueueUrl(ListQueuesResponse ls){
-        System.out.println("Worker: getQueueUrl");
         return ls.queueUrls().get(0);
     }
 
     private void processMessage(Message message){
-        System.out.println("Worker: processMessage");
         String[] parsedMessage = parseMessage(message);
         String clientQueue = parsedMessage[0];
         String output;
@@ -95,19 +92,16 @@ public class Worker {
 
     //Read max or all available messages
     private List<Message> readMessages(){
-        System.out.println("Worker: readMessages");
         List<Message> message = SQS_Service.getInstance().receiveMessage(managerToWorkers_queueURL);
         return message;
     }
 
     //Message from manager is in the form of: queueUrl + "\n" + imageUrl
     private String[] parseMessage(Message message){
-        System.out.println("Worker: parseMessage");
         return message.body().split("\\n");
     }
 
     private File downloadImage(String imageUrl){
-        System.out.println("Worker: downloadImage");
         //download the image
         Path imagePath = Paths.get(imagePathString);
         try(InputStream inputStream = new URL(imageUrl).openStream()){
@@ -122,7 +116,6 @@ public class Worker {
     }
 
     private String executeMessage(String imageUrl){
-        System.out.println("Worker: executeOCR");
         File imageFile = downloadImage(imageUrl);
         Tesseract tesseract = new Tesseract();
         try{
@@ -144,7 +137,6 @@ public class Worker {
     }
 
     private String executeMessage_noOCR(String imageUrl){
-        System.out.println("Worker: executeMessage");
         File imageFile = downloadImage(imageUrl);
         String txt;
         try{
