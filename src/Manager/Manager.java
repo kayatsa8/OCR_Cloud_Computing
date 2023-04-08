@@ -49,23 +49,6 @@ public class Manager {
     public void run(){
         mainPool.submit(thread1Serve());
         mainPool.submit(thread2Serve());
-
-//        System.out.println("PRINT:run");
-//        Thread t1 = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                thread1Serve();
-//            }
-//        });
-//        Thread t2 = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                thread2Serve();
-//            }
-//        });
-//        t1.start();
-//        t2.start();
-
     }
 
     //Both thread1 and thread2 used-functions.
